@@ -9,3 +9,5 @@ A perfectly periodic system repeats exactly the same behavior, over and over aga
 Not only are their periods not perfectly periodic, but these stars also sometimes “switch” from one period to another(a process known as mode switching). Their amplitudes change dramatically: they may suddenly increase their variability, or they may stop varying altogether (but when they do, they usually start up again soon after).
 
 Many variables are not perfectly periodic despite repeating cycles over and over again. Each cycle is a little different.
+
+![image](https://github.com/user-attachments/assets/e54e56a0-6e23-4236-8084-bf8576bcaf7f)
