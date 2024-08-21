@@ -2,11 +2,12 @@ from matplotlib import pyplot as plt
 import numpy as np
 
 
-#### BF PAV ###
-# https://www.as.up.krakow.pl/minicalc/PAVBF.HTM
-# p = 0.302318119
-# m0 = 2445886.5615
-#### BF PAV ###
+""" 
+neme = BF PAV
+https://www.as.up.krakow.pl/minicalc/PAVBF.HTM
+p = 0.302318119
+m0 = 2445886.5615
+"""
 
 
 def o_c_calc(m_obs, typ):
