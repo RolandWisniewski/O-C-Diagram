@@ -11,29 +11,29 @@ m0 = 2445886.5615
 
 
 def o_c_calc(m_obs, typ):
-    # Funkcja obliczająca liczbę okresów E, moment minimum oraz o-c
+    # Function that calculates the number of E periods, the moment of minimum and o-c
     p = 0.302318119
     m0 = 2448056.9016
     e1 = (m_obs - m0) / p 
-    if typ == 'pri': # Od typu zależy w jaki sposób zaokrąglić e
+    if typ == 'pri': # The type determines how to round e
         e2 = int(e1) + 1
     else:
         e2 = round(e1*2) / 2
     mc = m0 + p * e2
     o_c = m_obs - mc
-    return o_c, e2 # Funkcja zwraca o-c oraz e
+    return o_c, e2 # The function returns o-c and e
 
 with open('/content/drive/MyDrive/BF_Pav_minima.csv', 'r') as f:
-    header1 = f.readline() # Wyodrębnienie nagłówków
+    header1 = f.readline() # Extracting headers
     header2 = f.readline()
     data = np.array([i.strip().split(',') for i in f.read().splitlines()])
     o_c_list = []
     epoch = []
     for i in data:
-        """ Pętla odczytuje kolejno m_obs oraz typ
-            ('pri' lub 'sec') z arraya, po czym podstawia dane
-            do funkcji o_c_calc, a otrzymane wyniki 
-            dopisuje do wcześniej stworzonych list """
+        """ The loop reads m_obs and 
+            the type ('pri' or 'sec') from array,
+            then inserts the data into the o_c_calc function,
+            and adds the obtained results to the previously created lists """
         m_obs = float(i[0])
         typ = i[2]
         o_c, e = o_c_calc(m_obs, typ)
@@ -41,7 +41,7 @@ with open('/content/drive/MyDrive/BF_Pav_minima.csv', 'r') as f:
         epoch.append(e)
 
 for i in range(len(o_c_list)-1):
-    # Pętla, która usuwa wartości odstające od normy
+    # A loop that removes outliers from the norm
     if abs(o_c_list[i]) > 0.1:
         del o_c_list[i]
         del epoch[i]
@@ -50,11 +50,11 @@ p = np.polyfit(epoch, o_c_list, 3)
 """ np.polyfit to funkcja, która pozwala na interpolację wielomianową
     w tym przypadku 3go stopnia, celem jest wygładzenie funkcji """
 x_new = np.linspace(min(epoch), max(epoch))
-# Nowe punkty, w których chcemy interpolować
+# New points where we want to interpolate
 y_interp = np.polyval(p, x_new)
-# Interpolacja wielomianowa
+# Polynomial interpolation
 
-plt.title("BF Pav") # Nagłówek
+plt.title("BF Pav")
 plt.axhline(y=0, color='#D3D3D3', linestyle='--')
 plt.plot(epoch, o_c_list, color='#3480eb60')
 plt.plot(x_new, y_interp, color='black')
