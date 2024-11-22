@@ -23,7 +23,7 @@ def o_c_calc(m_obs, typ):
     o_c = m_obs - mc
     return o_c, e2 # The function returns o-c and e
 
-with open('/content/drive/MyDrive/BF_Pav_minima.csv', 'r') as f:
+with open('BF_Pav_minima.csv', 'r') as f:
     header1 = f.readline() # Extracting headers
     header2 = f.readline()
     data = np.array([i.strip().split(',') for i in f.read().splitlines()])
@@ -47,8 +47,8 @@ for i in range(len(o_c_list)-1):
         del epoch[i]
 
 p = np.polyfit(epoch, o_c_list, 3)
-""" np.polyfit to funkcja, która pozwala na interpolację wielomianową
-    w tym przypadku 3go stopnia, celem jest wygładzenie funkcji """
+""" is a function that allows for polynomial interpolation, 
+    in this case of the 3rd degree, the goal is to smooth the function """
 x_new = np.linspace(min(epoch), max(epoch))
 # New points where we want to interpolate
 y_interp = np.polyval(p, x_new)
